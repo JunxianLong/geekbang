@@ -1,3 +1,9 @@
+import (
+	"database/sql"
+	pkgErrors "github.com/pkg/errors"
+)
+
+
 // GetUserNameByID 根据ID获取用户名
 func (*seqDao) GetUserNameByID(userID int)(string ,error) {
 	tx := DB.Begin()
