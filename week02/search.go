@@ -19,5 +19,6 @@ func (*seqDao) GetUserNameByID(userID int)(string ,error) {
 	/*
 		do something
 	 */
+	tx.Commit()
 	return "",nil
 }
