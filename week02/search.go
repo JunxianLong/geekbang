@@ -1,5 +1,6 @@
 import (
 	"database/sql"
+	"errors"
 	pkgErrors "github.com/pkg/errors"
 )
 
