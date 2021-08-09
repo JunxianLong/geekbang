@@ -16,8 +16,6 @@ import (
 func main() {
 	g, ctx := errgroup.WithContext(context.Background())
 
-	quit := make(chan struct{})
-
 	server := http.Server{Addr: "127.0.0.1:8080"}
 
 	// 启动Web服务
@@ -29,10 +27,12 @@ func main() {
 		select {
 		case <-ctx.Done():
 			fmt.Println("quit")
-		case <-quit:
-			log.Println("server will out...")
 		}
-		return server.Shutdown(ctx)
+		
+		timeOutCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		
+		return server.Shutdown(timeOutCtx)
 	})
 
 	g.Go(func() error {
